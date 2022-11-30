@@ -5,14 +5,8 @@ import { bearerAuth } from 'hono/bearer-auth'
 import {GenerateCID } from './utils'
 import { web3StoreFile } from './web3storage.helper'
 
-export interface Bindings {
-  BUCKET: R2Bucket
-  USER: string
-  PASS: string
-}
-
 interface Data {
-  body: string
+  body: any
 }
 
 const token = "INSERTBEARERAUTH TOKEN HERE";
