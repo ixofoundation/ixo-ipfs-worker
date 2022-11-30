@@ -44,7 +44,7 @@ yarn deploy
 Add your Web3storage Secret key housed in the secret manager tool of cloudflare.
 
 ```
-wrangler secret put IPFS_WORKER_MNEMONIC
+wrangler secret put IPFS_WORKER_TOKEN
 ```
 
 ## Author

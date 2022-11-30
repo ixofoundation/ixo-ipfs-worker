@@ -9,10 +9,10 @@ interface Data {
   body: any
 }
 
-const token = "INSERTBEARERAUTH TOKEN HERE";
+
 
 const app = new Hono()
-app.use('/upload/*', bearerAuth({ token }))
+app.use('/upload/*', bearerAuth({ "token" }))
 
 
 app.put('/upload', async (c) => {
