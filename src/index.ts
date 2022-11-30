@@ -25,18 +25,19 @@ app.put('/upload', async (c, next) => {
 
 app.put('/upload', async (c) => {
   const data = await c.req.json<Data>()
-  const base64 = data.body
-
-  if (!base64) return c.notFound()
-
-  const type = detectType(base64)
-  if (!type) return c.notFound()
+  const Request = JSON.parse(data.body);
+  const base64 = Request.base64;
+  const mimetype = Request.mimetype;
 
   let cid = await GenerateCID(base64);
   const body = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0))
 
-  const key = (await sha256(body)) + '.' + type?.suffix
-  await c.env.BUCKET.put(key, body, { httpMetadata: { contentType: type.mimeType } })
+  const key = await sha256(body);
+
+  const file = new File([body], key, {type: mimetype});
+
+  web3StoreFile()
+ 
   
   return c.json({ image: key, cid:cid })  
 
