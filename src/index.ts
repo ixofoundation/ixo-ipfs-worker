@@ -1,5 +1,5 @@
 import { Hono } from 'hono'
-
+import { poweredBy } from 'hono/powered-by'
 import { sha256 } from 'hono/utils/crypto'
 import { bearerAuth } from 'hono/bearer-auth'
 import {GenerateCID } from './utils'
@@ -9,12 +9,20 @@ interface Data {
   body: any
 }
 
-
+const token = "INSERTHERE";
 
 const app = new Hono()
-app.use('/upload/*', bearerAuth({ "token" }))
+app.use('/upload/*', bearerAuth({ token }))
 
+app.use('*', poweredBy())
 
+app.get('/', (c) => {
+  return c.text('Api up and running')
+})
+
+app.get('/status', (c) => {
+  return c.text('Api up and running')
+})
 app.put('/upload', async (c) => {
   const data = await c.req.json<Data>()
   const Request = JSON.parse(data.body);
@@ -34,3 +42,5 @@ app.put('/upload', async (c) => {
   return c.json({ meta: key, cid:cid })  
 
 })
+
+export default app
