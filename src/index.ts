@@ -24,10 +24,10 @@ app.get('/status', (c) => {
   return c.text('Api up and running')
 })
 app.put('/upload', async (c) => {
-  const data = await c.req.json<Data>()
-  const Request = JSON.parse(data.body);
-  const base64 = Request.base64;
-  const mimetype = Request.mimetype;
+  const data = await c.req.json<{base64,mimetype}>();
+
+  const base64 = data.base64;
+  const mimetype = data.mimetype;
 
   let cid = await GenerateCID(base64);
   const body = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0))
