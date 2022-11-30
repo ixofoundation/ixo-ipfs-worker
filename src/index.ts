@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 
 import { sha256 } from 'hono/utils/crypto'
-import { basicAuth } from 'hono/basic-auth'
+import { bearerAuth } from 'hono/bearer-auth'
 import { detectType,GenerateCID } from './utils'
 import { web3StoreFile,web3FetchFile } from './web3storage.helper'
 
@@ -15,13 +15,11 @@ interface Data {
   body: string
 }
 
+const token = "INSERTBEARERAUTH TOKEN HERE";
 
 const app = new Hono()
+app.use('/upload/*', bearerAuth({ token }))
 
-app.put('/upload', async (c, next) => {
-  const auth = basicAuth({ username: c.env.USER, password: c.env.PASS })
-  await auth(c, next)
-})
 
 app.put('/upload', async (c) => {
   const data = await c.req.json<Data>()
@@ -36,7 +34,7 @@ app.put('/upload', async (c) => {
 
   const file = new File([body], key, {type: mimetype});
 
-  web3StoreFile( c.env.IPFS_WORKER_MNEMONIC,file )
+  web3StoreFile( c.env.IPFS_WORKER_TOKEN,file )
  
   
   return c.json({ meta: key, cid:cid })  
