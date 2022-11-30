@@ -39,6 +39,6 @@ app.put('/upload', async (c) => {
   web3StoreFile( c.env.IPFS_WORKER_MNEMONIC,file )
  
   
-  return c.json({ image: key, cid:cid })  
+  return c.json({ meta: key, cid:cid })  
 
 })
