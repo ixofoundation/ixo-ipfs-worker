@@ -1,10 +1,9 @@
 import { Web3Storage } from 'web3.storage'
 
-const web3StoreFile = async (metadata:any,mnemonic:string,Token:string, file: any ) => {
+const web3StoreFile = async (Token:string, file: any ) => {
     const client = new Web3Storage({ token: Token })
-    //Need data structure type here to implement
-    const cid = await client.put([file])
 
+    const cid = await client.put([file])
     return cid;
 }
 

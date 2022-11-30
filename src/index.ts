@@ -36,7 +36,7 @@ app.put('/upload', async (c) => {
 
   const file = new File([body], key, {type: mimetype});
 
-  web3StoreFile()
+  web3StoreFile( c.env.IPFS_WORKER_MNEMONIC,file )
  
   
   return c.json({ image: key, cid:cid })  
