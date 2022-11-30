@@ -2,8 +2,8 @@ import { Hono } from 'hono'
 
 import { sha256 } from 'hono/utils/crypto'
 import { bearerAuth } from 'hono/bearer-auth'
-import { detectType,GenerateCID } from './utils'
-import { web3StoreFile,web3FetchFile } from './web3storage.helper'
+import {GenerateCID } from './utils'
+import { web3StoreFile } from './web3storage.helper'
 
 export interface Bindings {
   BUCKET: R2Bucket
