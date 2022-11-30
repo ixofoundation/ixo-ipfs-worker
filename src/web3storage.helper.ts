@@ -4,6 +4,8 @@ const web3StoreFile = async (Token:string, file: any ) => {
     const client = new Web3Storage({ token: Token })
 
     const cid = await client.put([file])
+    console.log(cid);
+    
     return cid;
 }
 

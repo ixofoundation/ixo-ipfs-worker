@@ -2,7 +2,7 @@ import { Hono } from 'hono'
 import { poweredBy } from 'hono/powered-by'
 import { sha256 } from 'hono/utils/crypto'
 import { bearerAuth } from 'hono/bearer-auth'
-import {GenerateCID } from './utils'
+
 import { web3StoreFile } from './web3storage.helper'
 
 interface Data {
@@ -29,14 +29,14 @@ app.put('/upload', async (c) => {
   const base64 = data.base64;
   const mimetype = data.mimetype;
 
-  let cid = await GenerateCID(base64);
+
   const body = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0))
 
   const key = await sha256(body);
 
   const file = new File([body], key, {type: mimetype});
 
-  web3StoreFile( c.env.IPFS_WORKER_TOKEN,file )
+ const cid = await web3StoreFile( c.env.IPFS_WORKER_TOKEN,file );
  
   
   return c.json({ meta: key, cid:cid })  
