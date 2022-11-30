@@ -1,24 +1,29 @@
 {
-  "name": "hono-minimal",
+  "name": "ixo-ipfs-worker",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "src/index.ts",
   "scripts": {
     "test": "jest --verbose",
     "dev": "wrangler dev src/index.ts",
+    "build": "wrangler publish --dry-run --outdir=dist",
     "deploy": "wrangler publish src/index.ts"
   },
   "license": "MIT",
   "dependencies": {
-    "hono": "^2.5.5"
+    "@cosmjs/amino": "^0.29.4",
+    "@cosmjs/stargate": "^0.29.4",
+    "cosmjs-types": "^0.5.2",
+    "hono": "^2.3.0",
+    "web3.storage": "^4.4.0"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20221111.1",
-    "@types/jest": "^29.2.3",
-    "esbuild": "^0.15.15",
+    "@cloudflare/workers-types": "^3.14.1",
+    "@types/jest": "^29.1.2",
+    "esbuild": "^0.15.5",
     "esbuild-jest": "^0.5.0",
-    "jest": "^29.3.1",
-    "jest-environment-miniflare": "^2.11.0",
-    "wrangler": "^2.4.4"
+    "jest": "^29.1.2",
+    "jest-environment-miniflare": "^2.10.0",
+    "wrangler": "^2.0.22"
   }
 }
