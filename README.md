@@ -2,9 +2,6 @@
 
 This is a cloudflare worker project for storing files on ipfs using Cloudflare Workers.
 
-# ixo-nft-worker
-
-This is a cloudflare worker project for processing NFT data using Cloudflare Workers.
 
 ## Features
 
