@@ -43,4 +43,24 @@ app.put('/upload', async (c) => {
 
 })
 
+app.put('/upload8bit', async (c) => {
+  const data = await c.req.json<{buffer,mimetype}>();
+
+  const buffer = data.buffer;
+  const mimetype = data.mimetype;
+
+
+  const body = Uint8Array.from(buffer)
+
+  const key = await sha256(body);
+
+  const file = new File([body], key, {type: mimetype});
+
+ const cid = await web3StoreFile( c.env.IPFS_WORKER_TOKEN,file );
+ 
+  
+  return c.json({ meta: key, cid:cid })  
+
+})
+
 export default app
